@@ -7,6 +7,7 @@ import edu.bsu.cs.model.Revision;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import edu.bsu.cs.model.Formatter;
 
 import java.io.IOException;
 import java.util.List;
@@ -34,6 +35,9 @@ public final class WikipediaAnalyzer extends VBox {
     @SuppressWarnings("unused")
     @Inject
     private ExecutorService executor;
+    @SuppressWarnings("unused")
+    @Inject
+    private Formatter formatter;
 
     public WikipediaAnalyzer() {
         queryButton.setOnAction(e -> attemptQuery());
@@ -58,7 +62,6 @@ public final class WikipediaAnalyzer extends VBox {
     private void runQuery(String articleTitle) {
         try {
             QueryResponse response = engine.queryRevisions(articleTitle);
-            RevisionFormatter formatter = new RevisionFormatter();
             StringBuilder stringBuilder = new StringBuilder();
             for (Revision revision : response.revisions()) {
                 String message = formatter.format(revision);
