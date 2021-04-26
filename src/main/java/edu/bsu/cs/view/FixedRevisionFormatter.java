@@ -13,8 +13,7 @@ public final class FixedRevisionFormatter implements Formatter {
     public String format(Revision revision) {
         // format used: [user] made changes at [time] on [date]
         return String.format("%s made changes %s",
-        revision.name,
-        DateTimeFormatter
+        revision.name, DateTimeFormatter
                 .ofPattern("hh:mm:ss uuuu-MM-dd a")
                 .withLocale(Locale.getDefault())
                 .withZone(ZoneId.systemDefault())
